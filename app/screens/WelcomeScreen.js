@@ -1,7 +1,10 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
+
+import AppText from '../components/AppText';
 
 import bgImage from '../assets/bg.jpg';
 import logo from '../assets/logo.png';
@@ -11,10 +14,10 @@ function WelcomeScreen(props) {
         <ImageBackground style={styles.background} source={bgImage}>
             <View style={styles.logoContainer}>
                 <Image source={logo} style={styles.logo} />
-                <Text style={styles.logoText}>Sell What You Don't Need</Text>
+                <AppText>Sell What You Don't Need</AppText>
             </View>
             <View style={[styles.btn, styles.loginButton]}>
-
+                <MaterialCommunityIcons name="email" size={60} color="blue" />
             </View>
             <View style={[styles.btn, styles.registerButton]}>
 
@@ -48,9 +51,18 @@ const styles = StyleSheet.create({
         marginTop: 70,
         marginLeft: 'auto',
         marginRight: 'auto',
+        backgroundColor: 'blue',
+        shadowColor: 'grey', // works just for IOS
+        shadowOffset: { width: 10, height: 10 },
+        shadowOpacity: 1,
+        shadowRadius: 10,
+        elevation: 20 // for Android
     },
     logoText: {
-        color: 'purple'
+        color: 'purple',
+        fontSize: 20,
+        fontStyle: 'italic',
+        fontWeight: '700'
     }
 })
 
