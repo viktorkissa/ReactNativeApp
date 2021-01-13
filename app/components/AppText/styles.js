@@ -1,15 +1,10 @@
-import React from 'react';
-import { Text, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
-function AppText({children}) {
-    return (
-        <Text style={styles.text}>{children}</Text>
-    );
-}
+import colors from '../../config/colors';
 
 const styles = StyleSheet.create({
     text: {
-        color: 'tomato',
+        color: colors.black,
         ...Platform.select({
             ios: {
                 fontSize: 20,
@@ -21,6 +16,6 @@ const styles = StyleSheet.create({
             }
         })
     }
-})
+});
 
-export default AppText;
+export default styles;

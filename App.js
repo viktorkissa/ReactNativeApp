@@ -19,10 +19,14 @@ import {
 import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
+import Cards from './app/components/Cards/Cards';
 
 export default function App() {
   //console.log(Dimensions.get('screen')); // screen - entire display width, window - visible window
   //console.log(useDimensions()); // give u dimesions on rotate
+  //console.log(Platform.Version, 'Version'); // for Android
+  // const majorVersionIOS = parseInt(Platform.Version, 10);
+  // console.log(majorVersionIOS, 'Version'); // for IOS and Android
   const { landscape, portrait} = useDeviceOrientation();
 
   const handlePress = () => {
@@ -51,7 +55,8 @@ export default function App() {
 
   return (
     <>
-      <WelcomeScreen /> 
+      <Cards />
+      {/* <WelcomeScreen />  */}
       <SafeAreaView style={styles.container}>
         <View style={styles.state1}>
           <Text numberOfLines={1} onPress={handlePress}>Lorem Ipsum adalah text contoh digunakan didalam industri pencetakan dan typesetting. Lorem Ipsum telah menjadi text contoh semenjak tahun ke 1500an, apabila pencetak yang kurang terkenal mengambil sebuah galeri cetak dan merobakanya menjadi satu buku spesimen. Ia telah bertahan bukan hanya selama lima kurun, tetapi telah melonjak ke era typesetting elektronik, dengan tiada perubahan ketara. Ia </Text>
