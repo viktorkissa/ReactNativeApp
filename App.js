@@ -20,6 +20,8 @@ import { useDimensions, useDeviceOrientation } from '@react-native-community/hoo
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import Cards from './app/components/Cards/Cards';
+import ListingDetaisScreen from './app/screens/ListingDetaisScreen';
+import ViewImageScreen from './app/screens/ViewImageScreen';
 
 export default function App() {
   //console.log(Dimensions.get('screen')); // screen - entire display width, window - visible window
@@ -55,7 +57,9 @@ export default function App() {
 
   return (
     <>
-      <Cards />
+      {/* <ListingDetaisScreen /> */}
+      <ViewImageScreen />
+      {/* <Cards /> */}
       {/* <WelcomeScreen />  */}
       <SafeAreaView style={styles.container}>
         <View style={styles.state1}>
