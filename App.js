@@ -22,6 +22,7 @@ import WelcomeScreen from './app/screens/WelcomeScreen';
 import Cards from './app/components/Cards/Cards';
 import ListingDetaisScreen from './app/screens/ListingDetaisScreen';
 import ViewImageScreen from './app/screens/ViewImageScreen';
+import MessagesScreen from './app/screens/MessagesScreen';
 
 export default function App() {
   //console.log(Dimensions.get('screen')); // screen - entire display width, window - visible window
@@ -57,8 +58,9 @@ export default function App() {
 
   return (
     <>
+      <MessagesScreen />
       {/* <ListingDetaisScreen /> */}
-      <ViewImageScreen />
+      {/* <ViewImageScreen /> */}
       {/* <Cards /> */}
       {/* <WelcomeScreen />  */}
       <SafeAreaView style={styles.container}>
