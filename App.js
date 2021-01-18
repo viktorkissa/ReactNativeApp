@@ -28,6 +28,7 @@ import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
+import LoginScreen from './app/screens/LoginScreen';
 
 export default function App() {
   //console.log(Dimensions.get('screen')); // screen - entire display width, window - visible window
@@ -63,7 +64,8 @@ export default function App() {
 
   return (
     <>
-     <ListingsScreen />
+     <LoginScreen />
+     {/* <ListingsScreen /> */}
       {/* <AccountScreen /> */}
       {/* <Screen>
         <ListItem 
