@@ -7,9 +7,14 @@ import logoImg from '../assets/logo.png';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/Button/AppButton';
 
-function LoginScreen(props) {
+function LoginScreen({ navigation, route }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        console.log(email, password);
+        navigation.navigate('Account', {email, password});
+    };
 
     return (
         <Screen style={styles.container}>
@@ -35,7 +40,7 @@ function LoginScreen(props) {
                 textContentType='password' 
                 secureTextEntry
             />
-            <AppButton title='Login' onPress={() => console.log(email, password)} />
+            <AppButton title='Login' onPress={handleLogin} />
         </Screen>
     );
 };

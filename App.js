@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { 
@@ -17,6 +18,8 @@ import {
   StatusBar as StatusBarAPI
 } from 'react-native';
 import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import Cards from './app/components/Cards/Cards';
@@ -29,6 +32,8 @@ import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
 import LoginScreen from './app/screens/LoginScreen';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   //console.log(Dimensions.get('screen')); // screen - entire display width, window - visible window
@@ -63,58 +68,35 @@ export default function App() {
   }
 
   return (
-    <>
-     <LoginScreen />
-     {/* <ListingsScreen /> */}
-      {/* <AccountScreen /> */}
-      {/* <Screen>
-        <ListItem 
-          title="My title" 
-          subTitle="My subtitle" 
-          ImageComponent={<Icon 
-            name='email'
-            size={50}
-            backgroundColor='red'
-            iconColor='white'
-          />}
-        />        
-      </Screen> */}
-      {/* <MessagesScreen /> */}
-      {/* <ListingDetaisScreen /> */}
-      {/* <ViewImageScreen /> */}
-      {/* <Cards /> */}
-      {/* <WelcomeScreen />  */}
-      <SafeAreaView style={styles.container}>
-        <View style={styles.state1}>
-          <Text numberOfLines={1} onPress={handlePress}>Lorem Ipsum adalah text contoh digunakan didalam industri pencetakan dan typesetting. Lorem Ipsum telah menjadi text contoh semenjak tahun ke 1500an, apabila pencetak yang kurang terkenal mengambil sebuah galeri cetak dan merobakanya menjadi satu buku spesimen. Ia telah bertahan bukan hanya selama lima kurun, tetapi telah melonjak ke era typesetting elektronik, dengan tiada perubahan ketara. Ia </Text>
-          <StatusBar style="auto" />
-          {/* <Image source={require('./assets/icon.png')} /> */}
-          <TouchableHighlight onPress={hanldeImagePress}> 
-            <Image 
-              source={{ 
-                width: 200,
-                height: 300,
-                uri: "https://picsum.photos/200/300" 
-              }} 
-              blurRadius={1}
-              fadeDuration={1000} />
-          </TouchableHighlight>
-          <TouchableNativeFeedback>
-            <View style={[styles.customBtn, styles.center]}><Text>Click me</Text></View>
-          </TouchableNativeFeedback>
-          <Button title="Click me" color="orange" onPress={handleButtonPress} />
-        </View>
-        <View style={styles.state2} style={{
-          flex: 1
-        }}>
-          <View style={{
-            backgroundColor: 'dodgerblue',
-            width: '100%',
-            height: landscape ? '100%' : '30%'
-          }}></View>
-        </View>           
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: 'Welcome to Login' }}
+          />
+        <Stack.Screen name="Account" component={AccountScreen} />
+        {/* <ListingsScreen /> */}
+          {/* <AccountScreen /> */}
+          {/* <Screen>
+            <ListItem 
+              title="My title" 
+              subTitle="My subtitle" 
+              ImageComponent={<Icon 
+                name='email'
+                size={50}
+                backgroundColor='red'
+                iconColor='white'
+              />}
+            />        
+          </Screen> */}
+          {/* <MessagesScreen /> */}
+          {/* <ListingDetaisScreen /> */}
+          {/* <ViewImageScreen /> */}
+          {/* <Cards /> */}
+          {/* <WelcomeScreen />  */}          
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -141,3 +123,34 @@ const styles = StyleSheet.create({
     display: 'none'
   }
 });
+
+{/* <SafeAreaView style={styles.container}> */}
+            {/* <View style={styles.state1}> */}
+              {/* <Text numberOfLines={1} onPress={handlePress}>Lorem Ipsum adalah text contoh digunakan didalam industri pencetakan dan typesetting. Lorem Ipsum telah menjadi text contoh semenjak tahun ke 1500an, apabila pencetak yang kurang terkenal mengambil sebuah galeri cetak dan merobakanya menjadi satu buku spesimen. Ia telah bertahan bukan hanya selama lima kurun, tetapi telah melonjak ke era typesetting elektronik, dengan tiada perubahan ketara. Ia </Text> */}
+              {/* <StatusBar style="auto" /> */}
+              {/* <Image source={require('./assets/icon.png')} /> */}
+              {/* <TouchableHighlight onPress={hanldeImagePress}>  */}
+                // <Image 
+                //   source={{ 
+                //     width: 200,
+                //     height: 300,
+                //     uri: "https://picsum.photos/200/300" 
+                //   }} 
+                //   blurRadius={1}
+                //   fadeDuration={1000} />
+              {/* </TouchableHighlight> */}
+              {/* <TouchableNativeFeedback> */}
+                {/* <View style={[styles.customBtn, styles.center]}><Text>Click me</Text></View> */}
+              {/* </TouchableNativeFeedback> */}
+              {/* <Button title="Click me" color="orange" onPress={handleButtonPress} /> */}
+            {/* </View> */}
+            // <View style={styles.state2} style={{
+            //   flex: 1
+            // }}>
+            //   <View style={{
+            //     backgroundColor: 'dodgerblue',
+            //     width: '100%',
+            //     height: landscape ? '100%' : '30%'
+            //   }}></View>
+            {/* </View>            */}
+          {/* </SafeAreaView> */}

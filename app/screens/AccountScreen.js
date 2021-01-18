@@ -27,13 +27,18 @@ const menuItems = [
     }
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation, route }) {
+    const handleLogout = () => {
+        navigation.navigate('Login');
+    };
+
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
                 <ListItem
                     title='Viktor Kyssa'
-                    subTitle='viktorkyssa23021994@gmail.com'
+                    // subTitle='viktorkyssa23021994@gmail.com'
+                    subTitle={route.params.email}
                     image={avatar}
                 />
             </View>
@@ -59,6 +64,7 @@ function AccountScreen(props) {
                 IconComponent={
                     <Icon name='logout' backgroundColor='#ffe66d' />
                 }
+                onPress={handleLogout}
             />
         </Screen>
     );
