@@ -8,6 +8,7 @@ import Card from '../components/Card/Card';
 import AppTextInput from '../components/AppTextInput';
 
 import img from '../assets/jacket.jpg';
+import AppPicker from '../components/AppPicker';
 
 const listings = [
     {
@@ -24,9 +25,25 @@ const listings = [
     }
 ];
 
+const categories = [
+    {
+        label: 'Furniture',
+        value: 1
+    },
+    {
+        label: 'Clothing',
+        value: 2
+    },
+    {
+        label: 'Cameras',
+        value: 3
+    }
+];
+
 function ListingsScreen(props) {
     const [firstName, setFirstName] = useState('');
     const [isNew, setIsNew] = useState(false);
+    const [category, setCategory] = useState(false);
 
     return (
         <Screen style={styles.screen}>
@@ -46,6 +63,13 @@ function ListingsScreen(props) {
             />
             <AppTextInput placeholder='Username' icon='email' />
             <Switch value={isNew} onValueChange={newValue => setIsNew(newValue)} />
+            <AppPicker 
+                selectedItem={category}
+                onSelectItem={item => setCategory(item)}
+                items={categories} 
+                placeholder='Category' 
+                icon='apps' 
+            />
             <FlatList 
                 data={listings}
                 keyExtractor={listing => listing.id.toString()}
