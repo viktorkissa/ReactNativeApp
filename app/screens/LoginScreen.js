@@ -4,9 +4,7 @@ import * as Yup from 'yup';
 
 import Screen from '../components/Screen';
 import { FadeInView } from '../components/AnimatedComponents';
-import AppFormField from '../components/AppFormField';
-import SubmitButton from '../components/SubmitButton';
-import AppForm from '../components/AppForm';
+import { AppForm, AppFormField, SubmitButton } from '../components/forms';
 
 import logoImg from '../assets/logo.png';
 
