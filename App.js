@@ -73,7 +73,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
             name="Login"
-            component={ListingEditScreen}
+            component={MessagesScreen}
             options={{ title: 'Welcome to Login' }}
           />
         <Stack.Screen name="Account" component={AccountScreen} />
