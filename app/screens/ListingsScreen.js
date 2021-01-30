@@ -5,7 +5,7 @@ import colors from '../config/colors';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card/Card';
-import AppTextInput from '../components/AppTextInput';
+import AppTextInput from '../components/TextInput';
 
 import img from '../assets/jacket.jpg';
 import AppPicker from '../components/AppPicker';
