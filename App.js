@@ -33,6 +33,7 @@ import AccountScreen from './app/screens/AccountScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
 import LoginScreen from './app/screens/LoginScreen';
 import ListingEditScreen from './app/screens/ListingEditScreen';
+import Test from './app/components/Test';
 
 const Stack = createStackNavigator();
 
@@ -73,7 +74,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
             name="Login"
-            component={ListingEditScreen}
+            component={Test}
             options={{ title: 'Welcome to Login' }}
           />
         <Stack.Screen name="Account" component={AccountScreen} />
