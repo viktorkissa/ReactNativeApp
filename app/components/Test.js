@@ -6,15 +6,25 @@ import * as Permissions from 'expo-permissions';
 import Screen from '../components/Screen';
 import AppButton from './Button/AppButton';
 import ImageInput from './ImageInput';
+import ImageInputList from './ImageInputList';
 
 function Test(props) {
-   const [image, setImage] = useState(null);
+   const [images, setImages] = useState([]);
+
+   const handleAdd = uri => {
+      setImages([...images, uri]);
+   };
+
+   const handleRemove = uri => {
+      setImages(images.filter(image => image !== uri));
+   };
 
    return (
      <Screen style={styles.container}>
-        <ImageInput 
-            imageUri={image} 
-            onChangeImage={uri => setImage(uri)}
+        <ImageInputList 
+            imageUris={images}
+            onAddImage={handleAdd}
+            onRemoveImage={handleRemove}
         />
      </Screen>
    );
