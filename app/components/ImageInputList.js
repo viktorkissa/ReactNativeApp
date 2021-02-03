@@ -1,8 +1,6 @@
 import React, { useRef } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 
-import checkIndexIsEveryThird from '../config/helpers';
-
 import ImageInput from './ImageInput';
 
 function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {

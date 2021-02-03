@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import * as Permissions from 'expo-permissions';
 
 import Screen from '../components/Screen';
-import AppButton from './Button/AppButton';
-import ImageInput from './ImageInput';
 import ImageInputList from './ImageInputList';
 
 function Test(props) {
