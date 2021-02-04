@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-native';
 import { Formik } from 'formik';
 
 function AppForm({ initialValues, onSubmit, validationSchema, children }) {
@@ -12,7 +11,6 @@ function AppForm({ initialValues, onSubmit, validationSchema, children }) {
             { ({ handleSubmit }) => (
                 <>
                     {children}
-                    <Button onPress={handleSubmit} title="Submit" />
                 </>
             ) }
         </Formik>

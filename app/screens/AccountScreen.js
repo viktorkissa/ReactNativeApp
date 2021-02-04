@@ -27,7 +27,7 @@ const menuItems = [
     }
 ];
 
-function AccountScreen({ navigation, route }) {
+function AccountScreen({ navigation, route = {} }) {
     const handleLogout = () => {
         navigation.navigate('Login');
     };
@@ -38,7 +38,7 @@ function AccountScreen({ navigation, route }) {
                 <ListItem
                     title='Viktor Kyssa'
                     // subTitle='viktorkyssa23021994@gmail.com'
-                    subTitle={route.params.email}
+                    subTitle={route.params?.email}
                     image={avatar}
                 />
             </View>

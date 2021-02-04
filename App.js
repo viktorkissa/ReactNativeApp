@@ -71,31 +71,37 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator 
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: 'tomato'
+          },
+          headerTintColor: 'white'
+        }}
+      >
         <Stack.Screen
             name="Login"
-            component={ListingEditScreen}
-            options={{ title: 'Welcome to Login' }}
+            component={LoginScreen}
+            options={{ 
+              title: 'Welcome to Login',
+              // headerStyle: {
+              //   backgroundColor: 'tomato'
+              // },
+              // headerTintColor: 'white',
+              // headerShown: false
+            }}
           />
-        <Stack.Screen name="Account" component={AccountScreen} />
-        {/* <ListingsScreen /> */}
+        <Stack.Screen 
+          name="Account" 
+          component={AccountScreen} 
+          options={({ route }) => ({ title: `Welcome ${route.params.email}` })}
+        />
+          {/* <ListingsScreen /> */}
           {/* <AccountScreen /> */}
-          {/* <Screen>
-            <ListItem 
-              title="My title" 
-              subTitle="My subtitle" 
-              ImageComponent={<Icon 
-                name='email'
-                size={50}
-                backgroundColor='red'
-                iconColor='white'
-              />}
-            />        
-          </Screen> */}
           {/* <MessagesScreen /> */}
           {/* <ListingDetaisScreen /> */}
           {/* <ViewImageScreen /> */}
-          {/* <Cards /> */}
+          {/* <Cards /> */} 
           {/* <WelcomeScreen />  */}          
       </Stack.Navigator>
     </NavigationContainer>

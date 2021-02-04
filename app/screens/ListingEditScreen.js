@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
 
 import useLocation from '../hooks/useLocation';
 
@@ -12,6 +13,7 @@ import {
 import Screen from '../components/Screen';
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import FormImagePicker from '../components/forms/FormImagePicker';
+import { SubmitButton } from '../components/forms';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label('Title'),
@@ -37,10 +39,12 @@ const initialValues ={
 
 function ListingEditScreen() {
     const location = useLocation();
+    const navigation = useNavigation();
 
     const handleSubmit = values => {
         console.log(location);
-    };
+        navigation.navigate('Account', { email: 'viktorkyssa@gmail.com' });
+    }; 
 
     return (
         <Screen style={styles.container}>
@@ -73,6 +77,7 @@ function ListingEditScreen() {
                     name='description'
                     placeholder='Description'
                 />
+                <SubmitButton title='Submit' />
             </AppForm>
         </Screen>
     )
