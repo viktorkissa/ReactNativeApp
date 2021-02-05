@@ -20,6 +20,8 @@ import {
 import { useDimensions, useDeviceOrientation } from '@react-native-community/hooks';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import Cards from './app/components/Cards/Cards';
@@ -36,6 +38,69 @@ import ListingEditScreen from './app/screens/ListingEditScreen';
 import Test from './app/components/Test';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: 'tomato',
+      activeTintColor: 'white',
+      inactiveBackgroundColor: '#eee',
+      inactiveTintColor: 'black'
+    }}
+  >
+    <Tab.Screen 
+      name='Login' 
+      component={LoginScreen} 
+      options={{
+        tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name='login' size={size} color={color} />
+      }}
+    />
+    <Tab.Screen 
+      name="Account" 
+      component={AccountScreen} 
+      options={{
+        tabBarIcon: ({ size, color }) => <MaterialCommunityIcons name='account' size={size} color={color} />
+      }}
+    />
+  </Tab.Navigator>
+);
+
+const StackNavigator = () => (
+  <Stack.Navigator 
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: 'tomato'
+      },
+      headerTintColor: 'white'
+    }}
+  >
+    <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ 
+          title: 'Welcome to Login',
+          // headerStyle: {
+          //   backgroundColor: 'tomato'
+          // },
+          // headerTintColor: 'white',
+          // headerShown: false
+        }}
+      />
+    <Stack.Screen 
+      name="Account" 
+      component={AccountScreen} 
+      options={({ route }) => ({ title: `Welcome ${route.params.email}` })}
+    />
+      {/* <ListingsScreen /> */}
+      {/* <AccountScreen /> */}
+      {/* <MessagesScreen /> */}
+      {/* <ListingDetaisScreen /> */}
+      {/* <ViewImageScreen /> */}
+      {/* <Cards /> */} 
+      {/* <WelcomeScreen />  */}          
+  </Stack.Navigator>
+);
 
 export default function App() {
   //console.log(Dimensions.get('screen')); // screen - entire display width, window - visible window
@@ -45,65 +110,25 @@ export default function App() {
   // console.log(majorVersionIOS, 'Version'); // for IOS and Android
   const { landscape, portrait} = useDeviceOrientation();
 
-  const handlePress = () => {
-    console.log('Pressed!');
-  }
-
-  const hanldeImagePress = () => {
-    console.log('Image tapped!');
-  }
-
-  const handleButtonPress = () => {
-    Alert.alert("My title", "My message", [
-      {
-        text: "Yes",
-        onPress: () => console.log("Yes")
-      },
-      {
-        text: "No",
-        onPress: () => console.log("No")
-      }
-    ]);
+  // const handleButtonPress = () => {
+  //   Alert.alert("My title", "My message", [
+  //     {
+  //       text: "Yes",
+  //       onPress: () => console.log("Yes")
+  //     },
+  //     {
+  //       text: "No",
+  //       onPress: () => console.log("No")
+  //     }
+  //   ]);
 
     // Works only on IOS
     // Alert.prompt("My title", "My message", text => console.log(text)); 
-  }
+  // }
 
   return (
     <NavigationContainer>
-      <Stack.Navigator 
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: 'tomato'
-          },
-          headerTintColor: 'white'
-        }}
-      >
-        <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{ 
-              title: 'Welcome to Login',
-              // headerStyle: {
-              //   backgroundColor: 'tomato'
-              // },
-              // headerTintColor: 'white',
-              // headerShown: false
-            }}
-          />
-        <Stack.Screen 
-          name="Account" 
-          component={AccountScreen} 
-          options={({ route }) => ({ title: `Welcome ${route.params.email}` })}
-        />
-          {/* <ListingsScreen /> */}
-          {/* <AccountScreen /> */}
-          {/* <MessagesScreen /> */}
-          {/* <ListingDetaisScreen /> */}
-          {/* <ViewImageScreen /> */}
-          {/* <Cards /> */} 
-          {/* <WelcomeScreen />  */}          
-      </Stack.Navigator>
+      <TabNavigator />
     </NavigationContainer>
   );
 }
