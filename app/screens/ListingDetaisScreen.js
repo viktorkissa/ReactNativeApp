@@ -6,16 +6,17 @@ import colors from '../config/colors';
 import AppText from '../components/AppText';
 import ListItem from '../components/ListItem';
 
-import img from '../assets/jacket.jpg';
 import avatar from '../assets/avatar.png';
 
-function ListingDetaisScreen(props) {
+function ListingDetaisScreen({ route }) {
+    const { image, title, price } = route.params;
+
     return (
         <View>
-            <Image source={img} style={styles.image} />
+            <Image source={image} style={styles.image} />
             <View style={styles.detailsContainer}>
-                <AppText style={styles.title}>Red jacket for sale</AppText>
-                <AppText style={styles.price}>$100</AppText>
+                <AppText style={styles.title}>{title}</AppText>
+                <AppText style={styles.price}>${price}</AppText>
                 <View style={styles.userContainer}> 
                     <ListItem 
                         image={avatar}

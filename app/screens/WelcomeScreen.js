@@ -10,7 +10,7 @@ import AppButton from '../components/Button/AppButton';
 import bgImage from '../assets/bg.jpg';
 import logo from '../assets/logo.png';
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
     return (
         <ImageBackground style={styles.background} source={bgImage} blurRadius={3}>            
             <View style={styles.logoContainer}>
@@ -19,11 +19,8 @@ function WelcomeScreen(props) {
                 <Text style={styles.logoText}>Sell What You Don't Need</Text>
             </View>
             <View style={styles.buttonContainer}>
-                <AppButton title="Login" customStyles={styles.loginButton} onPress={() => console.log('Loggin Tapped')} />
-                {/* <View style={[styles.btn, ]}>
-                    <MaterialCommunityIcons name="email" size={60} color="blue" />
-                </View> */}
-                <AppButton title="Register" customStyles={styles.registerButton} onPress={() => console.log('Register Tapped')} />       
+                <AppButton title="Login" customStyles={styles.loginButton} onPress={() => navigation.navigate('Login')} />
+                <AppButton title="Register" customStyles={styles.registerButton} onPress={() => navigation.navigate('Register')} />       
             </View>        
         </ImageBackground>
     );

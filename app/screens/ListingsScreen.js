@@ -40,7 +40,7 @@ const categories = [
     }
 ];
 
-function ListingsScreen(props) {
+function ListingsScreen({ navigation }) {
     const [firstName, setFirstName] = useState('');
     const [isNew, setIsNew] = useState(false);
     const [category, setCategory] = useState(false);
@@ -78,6 +78,7 @@ function ListingsScreen(props) {
                         title={item.title}
                         subTitle={`$${item.price}`}
                         image={item.image}
+                        onPress={() => navigation.navigate('ListingDetails', item)}
                     />
                 }
             />
