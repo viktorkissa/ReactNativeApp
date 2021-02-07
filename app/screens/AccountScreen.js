@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 
 import colors from '../config/colors';
+import routes from '../navigation/routes';
 
 import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
@@ -23,13 +24,14 @@ const menuItems = [
         icon: {
             name: 'email',
             backgroundColor: colors.secondary
-        }
+        },
+        targetScreen: 'Messages'
     }
 ];
 
 function AccountScreen({ navigation, route = {} }) {
     const handleLogout = () => {
-        navigation.navigate('Login');
+        navigation.navigate(routes.LOGIN);
     };
 
     return (
@@ -55,8 +57,9 @@ function AccountScreen({ navigation, route = {} }) {
                                 name={item.icon.name} 
                                 backgroundColor={item.icon.backgroundColor} />
                         }
+                        onPress={() => navigation.navigate(item.targetScreen)}
                       />
-                    }
+                    }                
                 />
             </View>
             <ListItem 

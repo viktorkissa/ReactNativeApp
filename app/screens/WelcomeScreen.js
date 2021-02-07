@@ -1,10 +1,9 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
+import routes from '../navigation/routes';
 
-import AppText from '../components/AppText';
 import AppButton from '../components/Button/AppButton';
 
 import bgImage from '../assets/bg.jpg';
@@ -19,8 +18,8 @@ function WelcomeScreen({ navigation }) {
                 <Text style={styles.logoText}>Sell What You Don't Need</Text>
             </View>
             <View style={styles.buttonContainer}>
-                <AppButton title="Login" customStyles={styles.loginButton} onPress={() => navigation.navigate('Login')} />
-                <AppButton title="Register" customStyles={styles.registerButton} onPress={() => navigation.navigate('Register')} />       
+                <AppButton title="Login" customStyles={styles.loginButton} onPress={() => navigation.navigate(routes.LOGIN)} />
+                <AppButton title="Register" customStyles={styles.registerButton} onPress={() => navigation.navigate(routes.REGISTER)} />       
             </View>        
         </ImageBackground>
     );

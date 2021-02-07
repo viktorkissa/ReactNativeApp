@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import { FlatList, StyleSheet, Switch, Text, TextInput } from 'react-native';
 
 import colors from '../config/colors';
+import routes from '../navigation/routes';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card/Card';
 import AppTextInput from '../components/TextInput';
+import AppPicker from '../components/AppPicker';
 
 import img from '../assets/jacket.jpg';
-import AppPicker from '../components/AppPicker';
 
 const listings = [
     {
@@ -78,7 +79,7 @@ function ListingsScreen({ navigation }) {
                         title={item.title}
                         subTitle={`$${item.price}`}
                         image={item.image}
-                        onPress={() => navigation.navigate('ListingDetails', item)}
+                        onPress={() => navigation.navigate(routes.LISTINGS_DETAILS, item)}
                     />
                 }
             />

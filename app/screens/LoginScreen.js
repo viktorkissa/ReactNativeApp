@@ -2,6 +2,8 @@ import React from 'react';
 import { Image, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
+import routes from '../navigation/routes';
+
 import Screen from '../components/Screen';
 import { FadeInView } from '../components/AnimatedComponents';
 import { AppForm, AppFormField, SubmitButton } from '../components/forms';
@@ -17,7 +19,7 @@ function LoginScreen({ navigation, route }) {
 
     const handleLogin = (values) => {
         console.log(values);
-        navigation.navigate('Account', values);
+        navigation.navigate(routes.ACCOUNT, values);
     };
 
     return (
