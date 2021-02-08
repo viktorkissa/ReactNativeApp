@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Switch, Text, TextInput } from 'react-native';
 
 import colors from '../config/colors';
 import routes from '../navigation/routes';
+import listingsAPI from '../api/listings';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card/Card';
@@ -10,21 +11,7 @@ import AppTextInput from '../components/TextInput';
 import AppPicker from '../components/AppPicker';
 
 import img from '../assets/jacket.jpg';
-
-const listings = [
-    {
-        id: 1,
-        title: 'Red jacket for sale',
-        price: 100,
-        image: img
-    },
-    {
-        id: 2,
-        title: 'Couch in great condition',
-        price: 1000,
-        image: img
-    }
-];
+import { useEffect } from 'react';
 
 const categories = [
     {
@@ -45,6 +32,17 @@ function ListingsScreen({ navigation }) {
     const [firstName, setFirstName] = useState('');
     const [isNew, setIsNew] = useState(false);
     const [category, setCategory] = useState(false);
+    const [listings, setListings] = useState([]);
+
+    useEffect(() => {
+        loadListings();
+    }, []);
+
+    const loadListings = async () => {
+        const res = await listingsAPI.getListings();
+        console.log(res);
+        setListings(res.data);
+    };
 
     return (
         <Screen style={styles.screen}>
@@ -78,7 +76,7 @@ function ListingsScreen({ navigation }) {
                     <Card 
                         title={item.title}
                         subTitle={`$${item.price}`}
-                        image={item.image}
+                        imageUrl={item.images[0].url}
                         onPress={() => navigation.navigate(routes.LISTINGS_DETAILS, item)}
                     />
                 }
