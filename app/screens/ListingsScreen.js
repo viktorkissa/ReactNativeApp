@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { FlatList, StyleSheet, Switch, Text, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { FlatList, StyleSheet } from 'react-native';
 
 import colors from '../config/colors';
 import routes from '../navigation/routes';
@@ -7,11 +7,9 @@ import listingsAPI from '../api/listings';
 
 import Screen from '../components/Screen';
 import Card from '../components/Card/Card';
-import AppTextInput from '../components/TextInput';
-import AppPicker from '../components/AppPicker';
-
-import img from '../assets/jacket.jpg';
-import { useEffect } from 'react';
+import AppButton from '../components/Button/AppButton';
+import AppText from '../components/AppText';
+import AppActivityIndicator from '../components/AppActivityIndicator';
 
 const categories = [
     {
@@ -29,46 +27,34 @@ const categories = [
 ];
 
 function ListingsScreen({ navigation }) {
-    const [firstName, setFirstName] = useState('');
-    const [isNew, setIsNew] = useState(false);
-    const [category, setCategory] = useState(false);
     const [listings, setListings] = useState([]);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         loadListings();
     }, []);
 
     const loadListings = async () => {
-        const res = await listingsAPI.getListings();
-        console.log(res);
-        setListings(res.data);
+        setLoading(true);
+        const { ok, data, problem } = await listingsAPI.getListings();
+        setLoading(false);
+
+        if (!ok) return setError(true);  
+
+        setError(false);
+        setListings(data);
     };
 
     return (
         <Screen style={styles.screen}>
-            <Text>{firstName}</Text>
-            <TextInput 
-                secureTextEntry
-                clearButtonMode='while-editing'
-                keyboardType='numeric'
-                maxLength={5}
-                placeholder="First Name" 
-                onChangeText={text => setFirstName(text)} 
-                style={{
-                    marginVertical: 20,
-                    borderBottomColor: '#ccc',
-                    borderBottomWidth: 1
-                }} 
-            />
-            <AppTextInput placeholder='Username' icon='email' />
-            <Switch value={isNew} onValueChange={newValue => setIsNew(newValue)} />
-            <AppPicker 
-                selectedItem={category}
-                onSelectItem={item => setCategory(item)}
-                items={categories} 
-                placeholder='Category' 
-                icon='apps' 
-            />
+            {error && (
+                <>
+                    <AppText>Couldn't retrieve the listings.</AppText>
+                    <AppButton title='Retry' onPress={loadListings} />
+                </>
+            )}
+            <AppActivityIndicator visible={loading} />
             <FlatList 
                 data={listings}
                 keyExtractor={listing => listing.id.toString()}

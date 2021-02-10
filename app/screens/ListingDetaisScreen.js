@@ -8,12 +8,12 @@ import ListItem from '../components/ListItem';
 
 import avatar from '../assets/avatar.png';
 
-function ListingDetaisScreen({ route }) {
-    const { image, title, price } = route.params;
+function ListingDetaisScreen({ route}) {
+    const { images, title, price } = route.params;
 
     return (
         <View>
-            <Image source={image} style={styles.image} />
+            <Image source={{ uri: images[0].url }} style={styles.image} />
             <View style={styles.detailsContainer}>
                 <AppText style={styles.title}>{title}</AppText>
                 <AppText style={styles.price}>${price}</AppText>
