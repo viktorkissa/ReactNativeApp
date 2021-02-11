@@ -10,6 +10,7 @@ import Card from '../components/Card/Card';
 import AppButton from '../components/Button/AppButton';
 import AppText from '../components/AppText';
 import AppActivityIndicator from '../components/AppActivityIndicator';
+import useApi from '../hooks/useApi';
 
 const categories = [
     {
@@ -27,24 +28,11 @@ const categories = [
 ];
 
 function ListingsScreen({ navigation }) {
-    const [listings, setListings] = useState([]);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const { data: listings, error, loading, request: loadListings } = useApi(listingsAPI.getListings);
 
     useEffect(() => {
         loadListings();
     }, []);
-
-    const loadListings = async () => {
-        setLoading(true);
-        const { ok, data, problem } = await listingsAPI.getListings();
-        setLoading(false);
-
-        if (!ok) return setError(true);  
-
-        setError(false);
-        setListings(data);
-    };
 
     return (
         <Screen style={styles.screen}>
