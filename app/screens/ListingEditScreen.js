@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 
 import useLocation from '../hooks/useLocation';
+import listingsApi from '../api/listings';
 
 import {
     AppForm,
@@ -14,6 +15,7 @@ import Screen from '../components/Screen';
 import CategoryPickerItem from '../components/CategoryPickerItem';
 import FormImagePicker from '../components/forms/FormImagePicker';
 import { SubmitButton } from '../components/forms';
+import UploadScreen from './UploadScreen';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label('Title'),
@@ -38,16 +40,29 @@ const initialValues ={
 }
 
 function ListingEditScreen() {
+    const [uploadVisible, setUploadVisible] = useState(false);
+    const [progress, setProgress] = useState(0);
     const location = useLocation();
     const navigation = useNavigation();
 
-    const handleSubmit = values => {
-        console.log(location);
-        navigation.navigate('Account', { email: 'viktorkyssa@gmail.com' });
-    }; 
+    const handleSubmit = async (listing) => {
+        setUploadVisible(true);
+        const { ok } = await listingsApi.addListing(
+            { ...listing, location },
+            progress => setProgress(progress)
+        );
+        setUploadVisible(false);
+
+        if (!ok) {
+            return alert('Could not save the listing.');
+        } 
+
+        alert('Success');
+    };  
 
     return (
         <Screen style={styles.container}>
+            <UploadScreen progress={progress} visible={uploadVisible} />
             <AppForm 
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -87,6 +102,6 @@ const styles = StyleSheet.create({
     container: {
         padding: 20
     }
-})
+});
 
 export default ListingEditScreen;
