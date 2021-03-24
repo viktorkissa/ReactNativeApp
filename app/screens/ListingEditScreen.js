@@ -45,7 +45,7 @@ function ListingEditScreen() {
     const location = useLocation();
     const navigation = useNavigation();
 
-    const handleSubmit = async (listing) => {
+    const handleSubmit = async (listing, { resetForm }) => {
         setProgress(0);
         setUploadVisible(true);
         const { ok } = await listingsApi.addListing(
@@ -57,6 +57,8 @@ function ListingEditScreen() {
             setUploadVisible(false);
             return alert('Could not save the listing.');
         } 
+
+        resetForm();
     };  
 
     return (
