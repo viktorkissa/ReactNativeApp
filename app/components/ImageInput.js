@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { View, StyleSheet, Image, TouchableWithoutFeedback, Alert } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
 import colors from '../config/colors';
 
 function ImageInput({ imageUri, onChangeImage }) {
     const requestPermission = async () => {
-        const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (!granted) 
+        const { granted: libGranted } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        const { granted: cameraGranted } = await ImagePicker.requestCameraPermissionsAsync();
+        if (!libGranted || !cameraGranted) 
            alert('You need to enable permission to access the library.');
      };
 
