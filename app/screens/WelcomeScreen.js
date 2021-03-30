@@ -10,6 +10,7 @@ import bgImage from '../assets/bg.jpg';
 import logo from '../assets/logo.png';
 
 function WelcomeScreen({ navigation }) {
+
     return (
         <ImageBackground style={styles.background} source={bgImage} blurRadius={3}>            
             <View style={styles.logoContainer}>

@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
+import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 
 import colors from '../config/colors';
 import routes from '../navigation/routes';
@@ -31,6 +32,8 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation, route = {} }) {
+    const netInfo = useNetInfo();
+
     const handleLogout = () => {
         navigation.navigate(routes.LOGIN);
     };
@@ -70,6 +73,9 @@ function AccountScreen({ navigation, route = {} }) {
                 }
                 onPress={handleLogout}
             />
+            {
+                netInfo.isInternetReachable ? <Text>Internet is reachable</Text> : <Text>Offline mode</Text>
+            }
         </Screen>
     );
 };
