@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../config/colors';
 import routes from '../navigation/routes';
@@ -33,6 +34,18 @@ const menuItems = [
 
 function AccountScreen({ navigation, route = {} }) {
     const netInfo = useNetInfo();
+    const demo = async () => {
+        try {
+            await AsyncStorage.setItem('person', JSON.stringify({ id: 1 }));
+            const value = await AsyncStorage.getItem('person');
+            const person = JSON.parse(value);
+            console.log(person);
+        } catch(err) {
+            console.log(err);
+        }
+    }    
+
+    demo();
 
     const handleLogout = () => {
         navigation.navigate(routes.LOGIN);
