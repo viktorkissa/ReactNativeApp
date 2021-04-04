@@ -39,6 +39,7 @@ import Test from './app/components/Test';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import AppNavigator from './app/navigation/AppNavigator';
+import OfflineNotice from './app/components/OfflineNotice';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -130,9 +131,12 @@ export default function App() {
   // }
 
   return (
-    <NavigationContainer theme={navigationTheme}>
-      <AppNavigator />
-    </NavigationContainer>
+    <>
+      <OfflineNotice />
+      <NavigationContainer theme={navigationTheme}>
+        <AppNavigator />
+      </NavigationContainer>
+    </>
   );
 }
 
