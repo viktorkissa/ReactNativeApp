@@ -2731,7 +2731,7 @@ expo-asset@~8.2.1:
     path-browserify "^1.0.0"
     url-parse "^1.4.4"
 
-expo-blur@~8.2.2:
+expo-blur@^8.2.2:
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/expo-blur/-/expo-blur-8.2.2.tgz#a7643d893afb7aed5512b25d5df22ee6083832c1"
   integrity sha512-Xiklw60RUPIchHKzfvLTIuccVDTIQEAIPv02yJY2xFDujQKjE0NU0/Z5Z+zsEI9QOi82jX9NbR8gQ+8Mm3hDhA==
@@ -3895,6 +3895,11 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
+
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
 keyv@^3.0.0:
   version "3.1.0"

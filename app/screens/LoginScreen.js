@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import authApi from '../api/auth';
 import AuthContext from '../auth/context';
 import { AppForm, AppFormField, ErrorMessage, SubmitButton } from '../components/forms';
+import authStorage from '../auth/storage';
 
 import Screen from '../components/Screen';
 import { FadeInView } from '../components/AnimatedComponents';
@@ -28,6 +29,7 @@ function LoginScreen({ navigation, route }) {
         setLoginFailed(false);
         const user = jwtDecode(result.data);
         authContext.setUser(user);
+        authStorage.storeToken(result.data);
     };
 
     return (

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../config/colors';
-import routes from '../navigation/routes';
+import AuthContext from '../auth/context';
+import authStorage from '../auth/storage';
 
 import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
@@ -33,6 +34,8 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation, route = {} }) {
+    const { user, setUser } = useContext(AuthContext);
+
     const netInfo = useNetInfo();
     const demo = async () => {
         try {
@@ -48,16 +51,16 @@ function AccountScreen({ navigation, route = {} }) {
     demo();
 
     const handleLogout = () => {
-        navigation.navigate(routes.LOGIN);
+        setUser(null);
+        authStorage.removeToken();
     };
 
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
                 <ListItem
-                    title='Viktor Kyssa'
-                    // subTitle='viktorkyssa23021994@gmail.com'
-                    subTitle={route.params?.email}
+                    title={user.name}
+                    subTitle={user.email}
                     image={avatar}
                 />
             </View>
