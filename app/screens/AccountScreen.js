@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, View, FlatList, Text } from 'react-native';
 import NetInfo, { useNetInfo } from '@react-native-community/netinfo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../config/colors';
-import AuthContext from '../auth/context';
-import authStorage from '../auth/storage';
+import useAuth from '../auth/useAuth';
 
 import ListItem from '../components/ListItem';
 import Screen from '../components/Screen';
@@ -34,7 +33,7 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation, route = {} }) {
-    const { user, setUser } = useContext(AuthContext);
+    const { user, logOut } = useAuth();
 
     const netInfo = useNetInfo();
     const demo = async () => {
@@ -49,11 +48,6 @@ function AccountScreen({ navigation, route = {} }) {
     }    
 
     demo();
-
-    const handleLogout = () => {
-        setUser(null);
-        authStorage.removeToken();
-    };
 
     return (
         <Screen style={styles.screen}>
@@ -87,7 +81,7 @@ function AccountScreen({ navigation, route = {} }) {
                 IconComponent={
                     <Icon name='logout' backgroundColor='#ffe66d' />
                 }
-                onPress={handleLogout}
+                onPress={logOut}
             />
             {
                 netInfo.isInternetReachable ? <Text>Internet is reachable</Text> : <Text>Offline mode</Text>

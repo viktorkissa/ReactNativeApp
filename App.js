@@ -10,7 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import jwtDecode from 'jwt-decode';
+import AppLoading from 'expo-app-loading';
 
 import AuthContext from './app/auth/context';
 import AppNavigator from './app/navigation/AppNavigator';
@@ -21,7 +21,6 @@ import LoginScreen from './app/screens/LoginScreen';
 import AuthNavigator from './app/navigation/AuthNavigator';
 import navigationTheme from './app/navigation/navigationTheme';
 import OfflineNotice from './app/components/OfflineNotice';
-import { useEffect } from 'react/cjs/react.production.min';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -83,17 +82,18 @@ const StackNavigator = () => (
 
 export default function App() {
   const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
   const { landscape, portrait} = useDeviceOrientation();
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-    if (!token) return;
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user);
   }
 
-  useEffect(() => {
-    restoreToken();
-  }, []);
+  if (!isReady) {
+    return <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} onError={console.warn} />
+  }
+    
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
