@@ -1,8 +1,10 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 
-import routes from '../navigation/routes';
+import usersApi from '../api/users';
+import useAuth from '../auth/useAuth';
+import authApi from '../api/auth';
 
 import Screen from '../components/Screen';
 import { FadeInView } from '../components/AnimatedComponents';
@@ -15,16 +17,33 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen(props) {
-    const handleRegister = (values) => {
-        console.log(values);
-        navigation.navigate(routes.ACCOUNT, values);
+    const auth = useAuth();
+    const [error, setError] = useState();
+
+    const handleRegister = async (values) => {
+        const result = await usersApi.register(values);
+ 
+        if (!result.ok) {
+            if (result.data) setError(result.data.error);
+            else {
+                setError('An unexpected error occurred.');
+                console.log(result);
+            }
+            return;
+        }
+        
+        const { data: authToken } = await authApi.login(
+            values.email,
+            values.password
+        );
+        auth.logIn(authToken);
     };
 
    return (
     <Screen style={styles.container}>
         <FadeInView>
             <AppForm 
-                initialValues={{ email: '', password: '' }}
+                initialValues={{ name: '', email: '', password: '' }}
                 onSubmit={handleRegister}
                 validationSchema={validationSchema}
             >
