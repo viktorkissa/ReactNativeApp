@@ -15,6 +15,7 @@ import AppLoading from 'expo-app-loading';
 import AuthContext from './app/auth/context';
 import AppNavigator from './app/navigation/AppNavigator';
 import authStorage from './app/auth/storage';
+import { navigationRef } from './app/navigation/rootNavigation';
 
 import AccountScreen from './app/screens/AccountScreen';
 import LoginScreen from './app/screens/LoginScreen';
@@ -98,7 +99,7 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <OfflineNotice />
-      <NavigationContainer theme={navigationTheme}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme}>
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </AuthContext.Provider>

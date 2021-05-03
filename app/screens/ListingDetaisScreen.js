@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { Image } from 'react-native-expo-image-cache';
 
 import colors from '../config/colors';
 
 import AppText from '../components/AppText';
 import ListItem from '../components/ListItem';
+import ContactSellerForm from '../components/ContactSellerForm';
 
 import avatar from '../assets/avatar.png';
 
@@ -13,7 +14,10 @@ function ListingDetaisScreen({ route}) {
     const { images, title, price } = route.params;
 
     return (
-        <View>
+        <KeyboardAvoidingView 
+            behavior="position"
+            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 100}
+        >
             <Image 
                 uri={ images[0].url } 
                 preview={{ uri: images[0].thumbnailUrl }} 
@@ -30,8 +34,9 @@ function ListingDetaisScreen({ route}) {
                         subTitle="5 Listings"
                     />
                 </View>
+                <ContactSellerForm listing={route.params.listing} />
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 
